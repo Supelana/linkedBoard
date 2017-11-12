@@ -43,19 +43,43 @@ namespace LinkedBoard
         {
             foreach (var field in Fields)
             {
+                field.Right = GetRightField(field);
+                field.Left = GetLeftField(field);
                 field.Up = GetUpField(field);
                 field.Down = GetDownField(field);
             }     
         }
 
-        public Field GetDownField(Field field)
+        public Field GetRightField(Field field)
         {
-            if ((field.No + NumberOfColumns) >= Fields.Count)
+            if (field.No + 1 >= Fields.Count)
             {
                 return null;
             }
 
-            return Fields[field.No + NumberOfColumns];
+            Field rightField = Fields[field.No + 1];
+            if (field.RowNo == rightField.RowNo)
+            {
+                return rightField;
+            }
+
+            return null;
+        }
+
+        public Field GetLeftField(Field field)
+        {
+            if ((field.No - 1) < 0)
+            {
+                return null;
+            }
+
+            Field leftField = Fields[field.No - 1];
+            if (field.RowNo == leftField.RowNo)
+            {
+                return leftField;
+            }
+
+            return null;
         }
 
         public Field GetUpField(Field field)
@@ -68,6 +92,16 @@ namespace LinkedBoard
             return Fields[field.No - NumberOfColumns];
         }
 
+        public Field GetDownField(Field field)
+        {
+            if ((field.No + NumberOfColumns) >= Fields.Count)
+            {
+                return null;
+            }
+
+            return Fields[field.No + NumberOfColumns];
+        }
+
         public void PrintFields()
         {
             foreach (var field in Fields)
@@ -75,10 +109,27 @@ namespace LinkedBoard
                 Console.WriteLine("No: " + field.No);
                 Console.WriteLine("Row: " + field.RowNo + " " + "Column: " + field.ColumnNo);
 
+                if (field.Right != null)
+                {
+                    Console.WriteLine("Right: " + field.Right.No);
+                }
+
+                if (field.Left != null)
+                {
+                    Console.WriteLine("Left: " + field.Left.No);
+                }
+
+                if (field.Up != null)
+                {
+                    Console.WriteLine("Up: " + field.Up.No);
+                }
+
                 if (field.Down != null)
                 {
-                    Console.WriteLine(field.Down.No);
+                    Console.WriteLine("Down: " + field.Down.No);
                 }
+
+                Console.WriteLine("--------------------------------------");
             }
         }
     }

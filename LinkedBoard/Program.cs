@@ -10,7 +10,7 @@ namespace LinkedBoard
     {
         static void Main(string[] args)
         {
-            Board board = new Board(4,2);
+            Board board = new Board(9,3);
             board.CreateFields();
             board.ConnectFields();  
             board.PrintFields();

@@ -10,10 +10,39 @@ namespace LinkedBoard
     {
         static void Main(string[] args)
         {
-            Board board = new Board(9,3);
+            Board board = new Board(9, 3);
             board.CreateFields();
-            board.ConnectFields();  
-            board.PrintFields();
+            board.ConnectFields();
+            //board.PrintFields();
+            Field currentField = board.Fields[0];
+            Field previousField;
+            
+            while (true)
+            {
+                previousField = currentField;
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.RightArrow:
+                        currentField = currentField.Right;
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        currentField = currentField.Left;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        currentField = currentField.Up;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        currentField = currentField.Down;
+                        break;
+                }
+
+                if (currentField == null)
+                {
+                    currentField = previousField;
+
+                }
+                Console.WriteLine(currentField.No);
+            }
         }
     }
 }

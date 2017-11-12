@@ -28,7 +28,7 @@ namespace LinkedBoard
             for (int i = 0; i < NumberOfFields; i++)
             {
                 currentColumnNo++;
-                field = new Field(i,currentRowNo,currentColumnNo);
+                field = new Field(i, currentRowNo, currentColumnNo);
                 Fields.Add(field);
 
                 if (currentColumnNo == NumberOfColumns)
